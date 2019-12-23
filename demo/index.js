@@ -55,7 +55,7 @@ const textwriting = new Plugin.TypeWriting(
     size: 2,
     textColor: "#fff",
     cursorColor: [255, 255, 0],
-    title: "testdawdawddaws",
+    title: "@kissmybutton/motorcortex-typewritter",
     erase: 4,
     eraseAll: true,
     delayIfEraseAll: 0,
