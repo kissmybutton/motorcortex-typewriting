@@ -1,47 +1,66 @@
-# motorcortex-plugin-boilerplate
+# motorcortex-typewriting
 
-## "Usage"
+## Installation
 
-```
-In order to create a MotorCortex-Plugin we recommend using this boilerplate.
-```
-
-## Step 1
-
-Clone this repo using the command 
 ```bash
-git clone https://github.com/kissmybutton/motorcortex-plugin-boilerplate.git
+$ npm install --save @kissmybutton/motorcortex-typewriting
+# OR
+$ yarn add @kissmybutton/motorcortex-typewriting
 ```
 
-## Step 2
+## Loading
 
-Install all the required npm modules
-```bash
-npm i
+```javascript
+const MotorCortex = require("@kissmybutton/motorcortex/");
+const PluginDefinition = require("../src/main");
+const Plugin = MotorCortex.loadPlugin(PluginDefinition);
 ```
 
-## Step 3
+# Create incident
 
-Create your plugin in the src folder. There you will find all the files you need on order to create a plugin with one exported incident.
+## TxtWriting
 
-
-### Step 4
-
-In order to test your plugin in the demo folder we have a demo of the plugin. To run in simply type
-```bash
-npm start
+```javascript
+const nameOfIncident = new Plugin.TypeWriting(
+  {
+    size: 2,
+    textColor: "#fff",
+    cursorColor: [255, 255, 0],
+    title: "testdawdawddaws",
+    erase: 4,
+    eraseAll: true,
+    delayIfEraseAll: 0,
+    blinking: true,
+    blinkingDuration: 400,
+    blinkDelay: 100
+  },
+  {
+    selector: ".textwriting"
+  }
+);
 ```
 
-#### Step 5
+### TxtWriting Attrs
 
-When you are happy with your plugin execute the followig commands
-```bash
-npm run build
-npm run build:demo
+| Name        | Are           | Values  |
+| ------------- |:-------------:| -----:|
+| size    | sizing of the  row  | all positive numbers |
+| textColor |  the color of text |  hex values or RGB  |
+| cursorColor |  the color of cursor |  array with 3 columns evry one get values fro 0 to 255 like rbg  |
+| title |  left text |  normal text  |
+| erase |  erase characters    |  all positive numbers  |
+| eraseAll | erase all character after writing animation | true,false |
+| delayIfEraseAll | if you have erase all and the erase > 0 you can add delay after erase character animation |  all positive numbers  |
+| blinking |  if you like to have cursor   |  true,false |
+| blinkingDuration |  cursor blinking duration time  |   all positive numbers |
+| blinkDelay |  how fast the cursor blinks  |   all positive numbers |
 
-git add .
-npm run commit
-git push origin master
 
-npm publish
+
+
+# Add incident to your clip
+
+```javascript
+clipName.addIncident(nameOfIncident, 0);
+
 ```

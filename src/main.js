@@ -1,13 +1,11 @@
-const Plugin = require("./Plugin");
-const compositeAttributes = require("./compoAttributes");
+const TypeWriting = require("./TypeWriting");
 
 module.exports = {
-  npm_name: "@kissmybutton/motorcortex-<plugin>",
+  npm_name: "@kissmybutton/motorcortex-TypeWriting",
   incidents: [
     {
-      exportable: Plugin,
-      name: "Plugin"
+      exportable: TypeWriting,
+      name: "TypeWriting"
     }
-  ],
-  compositeAttributes
+  ]
 };
