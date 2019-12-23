@@ -1,7 +1,7 @@
 {
-  "name": "@kissmybutton/motorcortex-typewritter",
+  "name": "@kissmybutton/motorcortex-typewriting",
   "version": "0.0.1",
-  "description": "typewritter plugin for MotorCortex",
+  "description": "typewriting plugin for MotorCortex",
   "main": "./dist/main.js",
   "author": "KissMyButton PC (kissmybutton.gr) <opensource@kissmybutton.gr>",
   "repository": {
