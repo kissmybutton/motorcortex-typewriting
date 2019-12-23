@@ -1,5 +1,8 @@
 # motorcortex-typewriting
 
+## Demo
+[Check it out here](https://kissmybutton.github.io/motorcortex-typewriting/demo/index.html)
+
 ## Installation
 
 ```bash
