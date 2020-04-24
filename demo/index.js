@@ -1,6 +1,6 @@
-const MotorCortex = require("@kissmybutton/motorcortex/");
-const Player = require("@kissmybutton/motorcortex-player/");
-const PluginDefinition = require("../src/main");
+const MotorCortex = require("@kissmybutton/motorcortex");
+const Player = require("@kissmybutton/motorcortex-player");
+const PluginDefinition = require("../dist/motorcortex-typewriting.umd.js");
 const Plugin = MotorCortex.loadPlugin(PluginDefinition);
 
 const css = `.container { 

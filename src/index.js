@@ -1,7 +1,7 @@
 const TypeWriting = require("./TypeWriting");
 
 module.exports = {
-  npm_name: "@kissmybutton/motorcortex-TypeWriting",
+  npm_name: "@kissmybutton/motorcortex-typewriting",
   incidents: [
     {
       exportable: TypeWriting,

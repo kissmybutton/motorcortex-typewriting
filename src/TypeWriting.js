@@ -1,5 +1,5 @@
-const MotorCortex = require("@kissmybutton/motorcortex/");
-const AnimeDefinition = require("@kissmybutton/motorcortex-anime/dist/main");
+const MotorCortex = require("@kissmybutton/motorcortex");
+const AnimeDefinition = require("@kissmybutton/motorcortex-anime");
 const Anime = MotorCortex.loadPlugin(AnimeDefinition);
 
 class TypeWriting extends MotorCortex.API.Clip {
@@ -56,10 +56,10 @@ class TypeWriting extends MotorCortex.API.Clip {
 
   buildTree() {
     const array = this.attrs.title.split("");
-
+    let html3 = "";
     for (let i = 0; i < array.length; i++) {
       const html = `<span class='letter letter${i + 1}'>${array[i]}</span>`;
-      var html3 = html3 + html;
+      html3 += html;
     }
 
     const word = new MotorCortex.Clip({
@@ -73,14 +73,10 @@ class TypeWriting extends MotorCortex.API.Clip {
     const blink = new Anime.Anime(
       {
         animatedAttrs: {
-          borderRight: `2px solid rgba(${this.attrs.cursorColor[0]},${
-            this.attrs.cursorColor[1]
-          },${this.attrs.cursorColor[2]},0)`
+          borderRight: `2px solid rgba(${this.attrs.cursorColor[0]},${this.attrs.cursorColor[1]},${this.attrs.cursorColor[2]},0)`
         },
         initialValues: {
-          borderRight: `2px solid rgba(${this.attrs.cursorColor[0]},${
-            this.attrs.cursorColor[1]
-          },${this.attrs.cursorColor[2]},1)`
+          borderRight: `2px solid rgba(${this.attrs.cursorColor[0]},${this.attrs.cursorColor[1]},${this.attrs.cursorColor[2]},1)`
         },
         attrs: {
           easing: "linear"
