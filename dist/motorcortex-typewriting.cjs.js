@@ -1198,7 +1198,7 @@ function (_MotorCortex$API$Clip) {
 
       var word = new motorcortex.Clip({
         css: this.css,
-        html: " <div class=\"textContainer\" >".concat(html3.split("undefined")[1], " </div>"),
+        html: " <div class=\"textContainer\" >".concat(html3, " </div>"),
         selector: ".onemore"
       });
       var blink = new Anime.Anime({
@@ -1297,11 +1297,83 @@ function (_MotorCortex$API$Clip) {
 
 var TypeWriting_1 = TypeWriting;
 
+var _COLOR = "color";
+var TypeWriting$1 = {
+  size: {
+    optional: true,
+    type: "number",
+    min: 0
+  },
+  textColor: {
+    optional: true,
+    type: _COLOR
+  },
+  cursorColor: {
+    optional: true,
+    type: "array",
+    min: 3,
+    max: 3,
+    items: {
+      optional: true,
+      type: "number",
+      min: 0,
+      max: 255
+    }
+  },
+  title: {
+    optional: false,
+    type: "string"
+  },
+  erase: {
+    optional: true,
+    type: "number",
+    min: 0
+  },
+  eraseAll: {
+    type: "boolean",
+    optional: true
+  },
+  delayIfEraseAll: {
+    optional: true,
+    type: "number",
+    min: 0
+  },
+  blinking: {
+    type: "boolean",
+    optional: true
+  },
+  blinkingDuration: {
+    optional: true,
+    type: "number",
+    min: 0
+  },
+  blinkDelay: {
+    optional: true,
+    type: "number",
+    min: 0
+  },
+  overlayColor: {
+    optional: true,
+    type: "array",
+    min: 2,
+    items: {
+      optional: true,
+      type: _COLOR
+    }
+  }
+};
+
+var validation = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  TypeWriting: TypeWriting$1
+});
+
 var src = {
   npm_name: "@kissmybutton/motorcortex-typewriting",
   incidents: [{
     exportable: TypeWriting_1,
-    name: "TypeWriting"
+    name: "TypeWriting",
+    attributesValidationRules: validation.TypeWriting
   }]
 };
 var src_1 = src.npm_name;

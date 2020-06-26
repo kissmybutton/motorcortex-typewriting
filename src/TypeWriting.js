@@ -56,6 +56,7 @@ class TypeWriting extends MotorCortex.API.Clip {
 
   buildTree() {
     const array = this.attrs.title.split("");
+
     let html3 = "";
     for (let i = 0; i < array.length; i++) {
       const html = `<span class='letter letter${i + 1}'>${array[i]}</span>`;
@@ -64,9 +65,7 @@ class TypeWriting extends MotorCortex.API.Clip {
 
     const word = new MotorCortex.Clip({
       css: this.css,
-      html: ` <div class="textContainer" >${
-        html3.split("undefined")[1]
-      } </div>`,
+      html: ` <div class="textContainer" >${html3} </div>`,
       selector: ".onemore"
     });
 
