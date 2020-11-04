@@ -19,6 +19,10 @@ const css = `.container {
   
  
  }
+ .textwriting{
+   width:700px;
+   height: 50px;
+ }
  .cel{
   display: flex;
   justify-content: center;
@@ -29,9 +33,9 @@ const css = `.container {
 
 const html = `<div class="container">
 
-<div class="row" >
-  <div class="cel"><div class="textwriting"></div> </div>
-</div>
+
+<div class="textwriting"></div> 
+
 
 </div>`;
 

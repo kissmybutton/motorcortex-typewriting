@@ -38,6 +38,7 @@ class TypeWriting extends MotorCortex.API.Clip {
       text-align: center;
       width: ${12 * this.attrs.size}px;
       display: flex;
+      left:5px
       justify-content: center;
       flex: 1 0;
       color: ${this.attrs.textColor}
@@ -48,7 +49,7 @@ class TypeWriting extends MotorCortex.API.Clip {
       align-items: center;
       padding-right: 2px;
       width: 0px;
-
+      height: ${16*this.attrs.size}px
     }
 
   `;
