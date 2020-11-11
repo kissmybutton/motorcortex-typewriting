@@ -2,7 +2,7 @@ const MotorCortex = require("@kissmybutton/motorcortex");
 const AnimeDefinition = require("@kissmybutton/motorcortex-anime");
 const Anime = MotorCortex.loadPlugin(AnimeDefinition);
 
-class TypeWriting extends MotorCortex.API.Clip {
+class TypeWriting extends MotorCortex.HTMLClip {
   get html() {
     return `
      <div class="wrapper">
@@ -64,7 +64,7 @@ class TypeWriting extends MotorCortex.API.Clip {
       html3 += html;
     }
 
-    const word = new MotorCortex.Clip({
+    const word = new MotorCortex.HTMLClip({
       css: this.css,
       html: ` <div class="textContainer" >${html3} </div>`,
       selector: ".onemore"
