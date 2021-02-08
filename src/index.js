@@ -1,12 +1,16 @@
-const TypeWriting = require("./TypeWriting");
-const attrs = require("./validation");
-module.exports = {
-  npm_name: "@kissmybutton/motorcortex-typewriting",
+import TypeWriting from "./TypeWriting"
+import {TypeWritingVal} from "./validation"
+
+const pkg = require("../package.json");
+
+export default {
+  npm_name: pkg.name,
+  version: pkg.version,
   incidents: [
     {
       exportable: TypeWriting,
       name: "TypeWriting",
-      attributesValidationRules: attrs.TypeWriting
+      attributesValidationRules: TypeWritingVal
     }
   ]
 };

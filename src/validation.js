@@ -1,6 +1,6 @@
 const _COLOR = "color";
 
-export const TypeWriting = {
+export const TypeWritingVal = {
   size: {
     optional: true,
     type: "number",
