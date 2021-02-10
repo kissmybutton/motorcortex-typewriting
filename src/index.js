@@ -1,11 +1,11 @@
 import TypeWriting from "./TypeWriting"
 import {TypeWritingVal} from "./validation"
 
-const pkg = require("../package.json");
+import {name,version}  from '../package.json'
 
 export default {
-  npm_name: pkg.name,
-  version: pkg.version,
+  npm_name: name,
+  version: version,
   incidents: [
     {
       exportable: TypeWriting,
