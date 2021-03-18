@@ -75,3 +75,6 @@ const textwriting = new Plugin.TypeWriting(
 clip.addIncident(textwriting, 0);
 
 new Player({ clip });
+
+console.log(JSON.stringify(clip.exportDefinition()))
+

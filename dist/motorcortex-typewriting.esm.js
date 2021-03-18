@@ -2463,7 +2463,7 @@ var TypeWritingVal = {
 };
 
 var name$1 = "@kissmybutton/motorcortex-typewriting";
-var version$1 = "1.0.10";
+var version$1 = "1.0.11";
 
 var index$1 = {
   npm_name: name$1,
