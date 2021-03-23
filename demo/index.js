@@ -1,80 +1,73 @@
-const MotorCortex = require("@kissmybutton/motorcortex");
-const Player = require("@kissmybutton/motorcortex-player");
-const PluginDefinition = require("../dist/motorcortex-typewriting.umd.js");
-const Plugin = MotorCortex.loadPlugin(PluginDefinition);
+import Player from "@kissmybutton/motorcortex-player";
+import { HTMLClip, loadPlugin } from "@kissmybutton/motorcortex/";
+import TypeWritingDefinition from "../src/";
+const TypeWriting = loadPlugin(TypeWritingDefinition);
 
-const css = `.container { 
-  position: relative; 
-  background:linear-gradient(141deg, #ccc 25%, #eee 40%, #ddd 55%);
-  height:100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: column;
- }
- .row{
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  
- 
- }
- .textwriting{
-   width:700px;
-   height: 50px;
- }
- .cel{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  position: absolute;
- }`;
-
-const html = `<div class="container">
-
-
-<div class="textwriting"></div> 
-
-
-</div>`;
-
-const host = document.getElementById("clip");
-
-const containerParams = {
-  width: "90%",
-  height: "90%"
-};
-
-const clip = new MotorCortex.HTMLClip({
-  css,
-  html,
-  host,
-  containerParams,
-  audio: "off"
+const clip = new HTMLClip({
+  html: `
+    <div class="container">
+      <div id="type-container"></div>
+    </div>`,
+  css: `
+  .container{
+    width:100%;
+    height:100%;
+    position:relative;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+  }
+  #type-container{
+    width:80%;
+    height:100px;
+  }
+`,
+  host: document.getElementById("clip"),
+  containerParams: {
+    width: "720px",
+    height: "640px",
+  },
 });
 
-const textwriting = new Plugin.TypeWriting(
+const typewrite = new TypeWriting.TypeWriting(
   {
-    size: 2,
-    textColor: "#fff",
-    cursorColor: [255, 255, 0],
-    title: "@kissmybutton/motorcortex-typewriting",
-    erase: 4,
-    eraseAll: true,
-    delayIfEraseAll: 0,
-    blinking: true,
-    blinkingDuration: 400,
-    blinkDelay: 100
+    attrs: {
+      css: `color:#37ff00;font-size:20px;font-weight:bold`,
+      showCursor: true,
+      cursorColor: "#37ff00",
+      delay: 3000,
+      hiatus: 2000,
+    },
+    animatedAttrs: {
+      text: `Wake up Neo...`,
+    },
   },
-  {
-    selector: ".textwriting"
-  }
+  { duration: 6000, selector: "#type-container" }
 );
 
-clip.addIncident(textwriting, 0);
+const typewrite1 = new TypeWriting.TypeWriting(
+  {
+    attrs: {
+      css: `color:#37ff00;font-size:20px;font-weight:bold;letter-spacing:2px`,
+      showCursor: true,
+      cursorCss: "color:#37ff00;font-size:20px;font-weight:bold;",
+      delay: 3000,
+      hiatus: 2000,
+    },
+    animatedAttrs: {
+      text: `The Matrix has you...`,
+    },
+  },
+  { duration: 6000, selector: "#type-container" }
+);
 
-new Player({ clip });
+clip.addIncident(typewrite, 0);
+clip.addIncident(typewrite1, 6000);
 
-console.log(JSON.stringify(clip.exportDefinition()))
-
+new Player({
+  scaleToFit: true,
+  clip: clip,
+  theme: "mc-green",
+  pointerEvents: false,
+});

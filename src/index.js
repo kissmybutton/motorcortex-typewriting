@@ -1,7 +1,7 @@
-import TypeWriting from "./TypeWriting"
-import {TypeWritingVal} from "./validation"
+import TypeWriting from "./TypeWriting";
+// import { TypeWritingVal } from "./validation";
 
-import {name,version}  from '../package.json'
+import { name, version } from "../package.json";
 
 export default {
   npm_name: name,
@@ -10,7 +10,6 @@ export default {
     {
       exportable: TypeWriting,
       name: "TypeWriting",
-      attributesValidationRules: TypeWritingVal
-    }
-  ]
+    },
+  ],
 };

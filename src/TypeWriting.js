@@ -1,176 +1,36 @@
-const MotorCortex = require("@kissmybutton/motorcortex");
-const AnimeDefinition = require("@kissmybutton/motorcortex-anime");
-const Anime = MotorCortex.loadPlugin(AnimeDefinition);
+import MC from "@kissmybutton/motorcortex";
 
-class TypeWriting extends MotorCortex.HTMLClip {
-  get html() {
-    return `
-     <div class="wrapper">
-      <div class="onemore">
-      
-      </div>
-    </div>`;
+export default class TypeWriting extends MC.Effect {
+  onGetContext() {
+    this.element.style = this.attrs.attrs.css;
+    this.cursorElement = `<span style="${this.attrs.attrs.cursorCss}">|</span>`;
+    this.delay = this.attrs.attrs.delay || 0;
+    this.hiatus = this.attrs.attrs.hiatus || 0;
   }
 
-  get css() {
-    return `
-    .wrapper{
-      white-space: nowrap;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      
-    }
-    .textContainer{
-      white-space: nowrap;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      padding-right: 2px;
-      width: ${12 * this.attrs.size * this.attrs.title.length}px;
-     
-    }
-    
-    .letter{
-      font-size: ${14 * this.attrs.size}px;
-      position: relative;
-      text-align: center;
-      width: ${12 * this.attrs.size}px;
-      display: flex;
-      left:5px
-      justify-content: center;
-      flex: 1 0;
-      color: ${this.attrs.textColor}
-    }
-    .onemore{
-      white-space: nowrap;
-      overflow: hidden;
-      align-items: center;
-      padding-right: 2px;
-      width: 0px;
-      height: ${16*this.attrs.size}px
-    }
-
-  `;
+  getScratchValue() {
+    return "";
   }
 
-  buildTree() {
-    const array = this.attrs.title.split("");
+  onProgress(fraction, currentTime) {
+    let text = "";
+    const { duration } = this.props;
+    const typeFraction = (duration - this.delay - this.hiatus) / duration;
+    const delayFraction = this.delay / duration;
+    let currentTypefraction = (fraction - delayFraction) / typeFraction;
+    if (currentTypefraction < 0) currentTypefraction = 0;
+    const currentTextLength = this.targetValue.length * currentTypefraction;
+    text += this.targetValue.slice(0, currentTextLength);
 
-    let html3 = "";
-    for (let i = 0; i < array.length; i++) {
-      const html = `<span class='letter letter${i + 1}'>${array[i]}</span>`;
-      html3 += html;
+    const { showCursor } = this.attrs.attrs;
+    const ishalfOfSecond = parseInt(currentTime / 500) % 2;
+    const beforeTyping = currentTime < this.delay;
+    const afterTyping = currentTime > this.props.duration - this.hiatus;
+    const typing = !beforeTyping && !afterTyping;
+    if (showCursor && (ishalfOfSecond || typing)) {
+      text += this.cursorElement;
     }
 
-    const word = new MotorCortex.HTMLClip({
-      css: this.css,
-      html: ` <div class="textContainer" >${html3} </div>`,
-      selector: ".onemore"
-    });
-
-    const blink = new Anime.Anime(
-      {
-        animatedAttrs: {
-          borderRight: `2px solid rgba(${this.attrs.cursorColor[0]},${this.attrs.cursorColor[1]},${this.attrs.cursorColor[2]},0)`
-        },
-        initialValues: {
-          borderRight: `2px solid rgba(${this.attrs.cursorColor[0]},${this.attrs.cursorColor[1]},${this.attrs.cursorColor[2]},1)`
-        },
-        attrs: {
-          easing: "linear"
-        }
-      },
-      {
-        duration: this.attrs.blinkingDuration,
-        selector: ".onemore",
-        repeats: 10,
-        delay: this.attrs.blinkDelay
-      }
-    );
-    if (this.attrs.blinking) {
-      this.addIncident(blink, 0);
-    }
-
-    this.addIncident(word, 0);
-
-    let totalWidth = 0;
-
-    for (let i = 0; i <= array.length; i++) {
-      totalWidth = totalWidth + 12 * this.attrs.size;
-      const write = new Anime.Anime(
-        {
-          animatedAttrs: {
-            width: `${totalWidth}px`
-          },
-
-          attrs: {
-            easing: "linear"
-          }
-        },
-        {
-          duration: 50,
-          selector: ".onemore",
-          delay: 50
-        }
-      );
-      this.addIncident(write, 50 * i);
-    }
-
-    for (let i = 0; i <= this.attrs.erase; i++) {
-      totalWidth = totalWidth - 12 * this.attrs.size;
-      const erase = new Anime.Anime(
-        {
-          animatedAttrs: {
-            width: `${totalWidth}px`
-          },
-
-          attrs: {
-            easing: "linear"
-          }
-        },
-        {
-          duration: 50,
-          selector: ".onemore",
-          delay: 50
-        }
-      );
-
-      this.addIncident(erase, 50 * array.length + 100 + 100 * (i + 1));
-    }
-
-    if (this.attrs.eraseAll) {
-      for (let i = 0; i <= array.length; i++) {
-        totalWidth = totalWidth - 12 * this.attrs.size;
-        const erase = new Anime.Anime(
-          {
-            animatedAttrs: {
-              width: `${totalWidth}px`
-            },
-
-            attrs: {
-              easing: "linear"
-            }
-          },
-          {
-            duration: 50,
-            selector: ".onemore",
-            delay: 50
-          }
-        );
-
-        this.addIncident(
-          erase,
-          50 * array.length +
-            100 +
-            100 * (this.attrs.erase + 1) +
-            100 * (i + 1) +
-            this.attrs.delayIfEraseAll
-        );
-      }
-    }
+    this.element.innerHTML = text;
   }
 }
-
-module.exports = TypeWriting;
