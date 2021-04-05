@@ -32,42 +32,36 @@ const clip = new HTMLClip({
 
 const typewrite = new TypeWriting.TypeWriting(
   {
-    attrs: {
-      css: `color:#37ff00;font-size:20px;font-weight:bold`,
-      showCursor: true,
-      cursorColor: "#37ff00",
-      delay: 3000,
-      hiatus: 2000,
-    },
-    animatedAttrs: {
-      text: `Wake up Neo...`,
-    },
+    css: `color:#37ff00;font-size:20px;font-weight:bold`,
+    showCursor: true,
+    cursorCss: "color:#37ff00;font-size:20px;font-weight:bold;",
+    delay: 3000,
+    hiatus: 2000,
+    duration: 6000,
+    text: `Wake up Neo...`,
   },
-  { duration: 6000, selector: "#type-container" }
+  { selector: "#type-container" }
 );
 
-const typewrite1 = new TypeWriting.TypeWriting(
+const typewriteOne = new TypeWriting.TypeWriting(
   {
-    attrs: {
-      css: `color:#37ff00;font-size:20px;font-weight:bold;letter-spacing:2px`,
-      showCursor: true,
-      cursorCss: "color:#37ff00;font-size:20px;font-weight:bold;",
-      delay: 3000,
-      hiatus: 2000,
-    },
-    animatedAttrs: {
-      text: `The Matrix has you...`,
-    },
+    css: `color:#37ff00;font-size:20px;font-weight:bold`,
+    showCursor: true,
+    cursorCss: "color:#37ff00;font-size:20px;font-weight:bold;",
+    delay: 3000,
+    hiatus: 2000,
+    duration: 6000,
+    text: `The Matrix has you...`,
   },
-  { duration: 6000, selector: "#type-container" }
+  { selector: "#type-container" }
 );
 
 clip.addIncident(typewrite, 0);
-clip.addIncident(typewrite1, 6000);
+clip.addIncident(typewriteOne, 6000);
 
 new Player({
   scaleToFit: true,
   clip: clip,
   theme: "mc-green",
-  pointerEvents: false,
+  pointerEvents: true,
 });

@@ -107,24 +107,26 @@ function _createSuper(Derived) {
   };
 }
 
-var TypeWriting = /*#__PURE__*/function (_MC$Effect) {
-  _inherits(TypeWriting, _MC$Effect);
+/*INNER PLUGIN*/
 
-  var _super = _createSuper(TypeWriting);
+var TypeWritingIncident = /*#__PURE__*/function (_MC$Effect) {
+  _inherits(TypeWritingIncident, _MC$Effect);
 
-  function TypeWriting() {
-    _classCallCheck(this, TypeWriting);
+  var _super = _createSuper(TypeWritingIncident);
+
+  function TypeWritingIncident() {
+    _classCallCheck(this, TypeWritingIncident);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(TypeWriting, [{
+  _createClass(TypeWritingIncident, [{
     key: "onGetContext",
     value: function onGetContext() {
-      this.element.style = this.attrs.attrs.css;
-      this.cursorElement = "<span style=\"".concat(this.attrs.attrs.cursorCss, "\">|</span>");
-      this.delay = this.attrs.attrs.delay || 0;
-      this.hiatus = this.attrs.attrs.hiatus || 0;
+      this.element.style = this.attrs.css;
+      this.cursorElement = "<span style=\"".concat(this.attrs.cursorCss, "\">|</span>");
+      this.delay = this.attrs.delay || 0;
+      this.hiatus = this.attrs.hiatus || 0;
     }
   }, {
     key: "getScratchValue",
@@ -135,6 +137,12 @@ var TypeWriting = /*#__PURE__*/function (_MC$Effect) {
     key: "onProgress",
     value: function onProgress(fraction, currentTime) {
       var text = "";
+
+      if (fraction == 1) {
+        this.element.innerHTML = text;
+        return;
+      }
+
       var duration = this.props.duration;
       var typeFraction = (duration - this.delay - this.hiatus) / duration;
       var delayFraction = this.delay / duration;
@@ -142,7 +150,7 @@ var TypeWriting = /*#__PURE__*/function (_MC$Effect) {
       if (currentTypefraction < 0) currentTypefraction = 0;
       var currentTextLength = this.targetValue.length * currentTypefraction;
       text += this.targetValue.slice(0, currentTextLength);
-      var showCursor = this.attrs.attrs.showCursor;
+      var showCursor = this.attrs.showCursor;
       var ishalfOfSecond = parseInt(currentTime / 500) % 2;
       var beforeTyping = currentTime < this.delay;
       var afterTyping = currentTime > this.props.duration - this.hiatus;
@@ -156,17 +164,81 @@ var TypeWriting = /*#__PURE__*/function (_MC$Effect) {
     }
   }]);
 
-  return TypeWriting;
+  return TypeWritingIncident;
 }(MC__default['default'].Effect);
 
+var TypeWritingIncidentDefinition = {
+  npm_name: "type-writing-definition",
+  version: "1.0.0",
+  incidents: [{
+    exportable: TypeWritingIncident,
+    name: "TypeWritingIncident",
+    attributesValidationRules: {}
+  }]
+};
+var TypeWritingPlugin = MC__default['default'].loadPlugin(TypeWritingIncidentDefinition);
+/*EXPORTED CLIP*/
+
+var ParseText = /*#__PURE__*/function (_MC$HTMLClip) {
+  _inherits(ParseText, _MC$HTMLClip);
+
+  var _super2 = _createSuper(ParseText);
+
+  function ParseText() {
+    _classCallCheck(this, ParseText);
+
+    return _super2.apply(this, arguments);
+  }
+
+  _createClass(ParseText, [{
+    key: "html",
+    get: function get() {
+      return "\n      <div class=\"container\">".concat(this.attrs.text, "</div>\n    ");
+    }
+  }, {
+    key: "css",
+    get: function get() {
+      return "\n    .container {\n      width: 100%;\n      height: 100%;\n    }\n  ";
+    }
+  }, {
+    key: "buildTree",
+    value: function buildTree() {
+      var _this$attrs = this.attrs,
+          css = _this$attrs.css,
+          showCursor = _this$attrs.showCursor,
+          cursorCss = _this$attrs.cursorCss,
+          delay = _this$attrs.delay,
+          hiatus = _this$attrs.hiatus,
+          text = _this$attrs.text,
+          duration = _this$attrs.duration;
+      var typewrite = new TypeWritingPlugin.TypeWritingIncident({
+        css: css,
+        showCursor: showCursor,
+        cursorCss: cursorCss,
+        delay: delay,
+        hiatus: hiatus,
+        animatedAttrs: {
+          text: text
+        }
+      }, {
+        duration: duration,
+        selector: ".container"
+      });
+      this.addIncident(typewrite, 0);
+    }
+  }]);
+
+  return ParseText;
+}(MC__default['default'].HTMLClip);
+
 var name = "@kissmybutton/motorcortex-typewriting";
-var version = "1.0.11";
+var version = "2.0.0";
 
 var index = {
   npm_name: name,
   version: version,
   incidents: [{
-    exportable: TypeWriting,
+    exportable: ParseText,
     name: "TypeWriting"
   }]
 };
