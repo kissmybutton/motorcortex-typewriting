@@ -1,6 +1,6 @@
 {
   "name": "@kissmybutton/motorcortex-typewriting",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "typewriting plugin for MotorCortex",
   "main": "dist/motorcortex-typewriting.cjs.js",
   "module": "dist/motorcortex-typewriting.esm.js",
