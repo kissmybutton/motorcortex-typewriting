@@ -1,69 +1,98 @@
-# motorcortex-typewriting
-
-## Demo
-[Check it out here](https://kissmybutton.github.io/motorcortex-typewriting/demo/index.html)
+# MotorCortex Typewriting
 
 ## Installation
-
 ```bash
-$ npm install --save @kissmybutton/motorcortex-typewriting
+$ npm install @kissmybutton/motorcortex-typewriting
 # OR
 $ yarn add @kissmybutton/motorcortex-typewriting
 ```
 
-## Loading
-
 ```javascript
-const MotorCortex = require("@kissmybutton/motorcortex/");
-const PluginDefinition = require("../src/main");
-const Plugin = MotorCortex.loadPlugin(PluginDefinition);
+import TypeWriting from "@kissmybutton/motorcortex-typewriting";
 ```
 
-# Create incident
 
-## TxtWriting
+## Key Concepts / Features
+MotorCortex TypeWriting add the type writing effect to your clips.
 
+
+## Documentation
+### Import and load the plugin to MotorCortex
 ```javascript
-const nameOfIncident = new Plugin.TypeWriting(
-  {
-    size: 2,
-    textColor: "#fff",
-    cursorColor: [255, 255, 0],
-    title: "testdawdawddaws",
-    erase: 4,
-    eraseAll: true,
-    delayIfEraseAll: 0,
-    blinking: true,
-    blinkingDuration: 400,
-    blinkDelay: 100
-  },
-  {
-    selector: ".textwriting"
+import { HTMLClip, loadPlugin } from "@kissmybutton/motorcortex/";
+import TypeWritingDefinition from "@kissmybutton/motorcortex-typewriting";
+const TypeWriting = loadPlugin(TypeWritingDefinition);
+
+const clip = new HTMLClip({
+  html: `
+    <div class="container"></div>`,
+  css: `
+  .container{
+    width:100%;
+    height:100%;
+    background:#151515;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 10%;
   }
+`,
+  host: document.getElementById("clip"),
+  containerParams: {
+    width: "720px",
+    height: "640px",
+  },
+});
+
+const typewrite = new TypeWriting.TypeWriting(
+  {
+    css: `color:#37ff00;font-size:20px;font-weight:bold`,
+    showCursor: true,
+    cursorCss: "color:#37ff00;font-size:20px;font-weight:bold;",
+    delay: 3000,
+    hiatus: 2000,
+    duration: 6000,
+    text: `Wake up, Neo...`,
+  },
+  { selector: ".container" }
 );
-```
 
-### TxtWriting Attrs
+const typewriteOne = new TypeWriting.TypeWriting(
+  {
+    css: `color:#37ff00;font-size:20px;font-weight:bold`,
+    showCursor: true,
+    cursorCss: "color:#37ff00;font-size:20px;font-weight:bold;",
+    delay: 3000,
+    hiatus: 2000,
+    duration: 6000,
+    text: `The Matrix has you...`,
+  },
+  { selector: ".container" }
+);
 
-| Name        | Are           | Values  |
-| ------------- |:-------------:| -----:|
-| size    | sizing of the  row  | all positive numbers |
-| textColor |  the color of text |  hex values or RGB  |
-| cursorColor |  the color of cursor |  array with 3 columns evry one get values fro 0 to 255 like rbg  |
-| title |  left text |  normal text  |
-| erase |  erase characters    |  all positive numbers  |
-| eraseAll | erase all character after writing animation | true,false |
-| delayIfEraseAll | if you have erase all and the erase > 0 you can add delay after erase character animation |  all positive numbers  |
-| blinking |  if you like to have cursor   |  true,false |
-| blinkingDuration |  cursor blinking duration time  |   all positive numbers |
-| blinkDelay |  how fast the cursor blinks  |   all positive numbers |
-
-
-
-
-# Add incident to your clip
-
-```javascript
-clipName.addIncident(nameOfIncident, 0);
+clip.addIncident(typewrite, 0);
+clip.addIncident(typewriteOne, 6000);
+clip.play();
 
 ```
+### Attributes
+| Name | Description | Default | Type |
+| --------- |:-----------| :----| ------: |
+| css | The CSS for the text | "" | string |
+| cursorCss | The CSS for the cursor | "" | string |
+| showCursor | Show or hide cursor | false | boolean |
+| delay | Blink cursor duration in milliseconds before start typing | 0 | number |
+| hiatus | Blink cursor duration in milliseconds after end of typing | 0 | number |
+| duration | The total duration in milliseconds | - | number |
+| text | The text to be typed | "" | string |
+
+### Demo
+https://kissmybutton.github.io/motorcortex-typewriting/demo/
+
+
+## License
+[MIT License](https://opensource.org/licenses/MIT)
+
+  
+  
+[![Kiss My Button](https://presskit.kissmybutton.gr/logos/kissmybutton-logo-small.png)](https://kissmybutton.gr)

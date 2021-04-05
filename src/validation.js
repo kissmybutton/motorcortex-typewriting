@@ -1,66 +1,32 @@
-const _COLOR = "color";
-
 export const TypeWritingVal = {
-  size: {
+  css: {
     optional: true,
-    type: "number",
-    min: 0
+    type: "string",
   },
-  textColor: {
+  showCursor: {
     optional: true,
-    type: _COLOR
+    type: "boolean",
   },
-  cursorColor: {
+  cursorCss: {
     optional: true,
-    type: "array",
-    min: 3,
-    max: 3,
-    items: {
-      optional: true,
-      type: "number",
-      min: 0,
-      max: 255
-    }
+    type: "string",
   },
-  title: {
+  delay: {
     optional: false,
-    type: "string"
+    type: "number",
+    min: 0,
   },
-  erase: {
+  hiatus: {
     optional: true,
     type: "number",
-    min: 0
+    min: 0,
   },
-  eraseAll: {
-    type: "boolean",
-    optional: true
-  },
-  delayIfEraseAll: {
-    optional: true,
+  duration: {
     type: "number",
-    min: 0
+    min: 0,
   },
-  blinking: {
-    type: "boolean",
-    optional: true
-  },
-  blinkingDuration: {
+  text: {
+    type: "string",
     optional: true,
-    type: "number",
-    min: 0
   },
-  blinkDelay: {
-    optional: true,
-    type: "number",
-    min: 0
-  },
-  overlayColor: {
-    optional: true,
-    type: "array",
-    min: 2,
-    items: {
-      optional: true,
-      type: _COLOR
-    }
-  }
 };

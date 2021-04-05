@@ -6,21 +6,16 @@ const TypeWriting = loadPlugin(TypeWritingDefinition);
 const clip = new HTMLClip({
   html: `
     <div class="container">
-      <div id="type-container"></div>
     </div>`,
   css: `
   .container{
     width:100%;
     height:100%;
-    position:relative;
-    background:black;
+    background:#151515;
     display:flex;
-    justify-content:center;
+    justify-content: flex-start;
     align-items: center;
-  }
-  #type-container{
-    width:80%;
-    height:100px;
+    padding-left: 10%;
   }
 `,
   host: document.getElementById("clip"),
@@ -38,9 +33,9 @@ const typewrite = new TypeWriting.TypeWriting(
     delay: 3000,
     hiatus: 2000,
     duration: 6000,
-    text: `Wake up Neo...`,
+    text: `Wake up, Neo...`,
   },
-  { selector: "#type-container" }
+  { selector: ".container" }
 );
 
 const typewriteOne = new TypeWriting.TypeWriting(
@@ -53,7 +48,7 @@ const typewriteOne = new TypeWriting.TypeWriting(
     duration: 6000,
     text: `The Matrix has you...`,
   },
-  { selector: "#type-container" }
+  { selector: ".container" }
 );
 
 clip.addIncident(typewrite, 0);
