@@ -226,7 +226,7 @@ var ParseText = /*#__PURE__*/function (_MC$HTMLClip) {
 }(MC.HTMLClip);
 
 var name = "@kissmybutton/motorcortex-typewriting";
-var version = "3.0.0";
+var version = "3.0.1";
 
 var index = {
   npm_name: name,
