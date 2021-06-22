@@ -49,9 +49,8 @@ const typewrite = new TypeWriting.TypeWriting(
     css: `color:#37ff00;font-size:20px;font-weight:bold`,
     showCursor: true,
     cursorCss: "color:#37ff00;font-size:20px;font-weight:bold;",
-    delay: 3000,
-    hiatus: 2000,
-    duration: 6000,
+    blinkDelay: 3000,
+    blinkhiatus: 2000,
     text: `Wake up, Neo...`,
   },
   { selector: ".container" }
@@ -62,9 +61,8 @@ const typewriteOne = new TypeWriting.TypeWriting(
     css: `color:#37ff00;font-size:20px;font-weight:bold`,
     showCursor: true,
     cursorCss: "color:#37ff00;font-size:20px;font-weight:bold;",
-    delay: 3000,
-    hiatus: 2000,
-    duration: 6000,
+    blinkDelay: 3000,
+    blinkhiatus: 2000,
     text: `The Matrix has you...`,
   },
   { selector: ".container" }
@@ -81,9 +79,8 @@ clip.play();
 | css | The CSS for the text | "" | string |
 | cursorCss | The CSS for the cursor | "" | string |
 | showCursor | Show or hide cursor | false | boolean |
-| delay | Blink cursor duration in milliseconds before start typing | 0 | number |
-| hiatus | Blink cursor duration in milliseconds after end of typing | 0 | number |
-| duration | The total duration in milliseconds | - | number |
+| blinkDelay | Blink cursor duration in milliseconds before start typing | 0 | number |
+| blinkhiatus | Blink cursor duration in milliseconds after end of typing | 0 | number |
 | text | The text to be typed | "" | string |
 
 ### Demo
