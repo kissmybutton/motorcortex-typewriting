@@ -11,17 +11,13 @@ export const TypeWritingVal = {
     optional: true,
     type: "string",
   },
-  delay: {
+  blinkDelay: {
     optional: false,
     type: "number",
     min: 0,
   },
-  hiatus: {
+  blinkhiatus: {
     optional: true,
-    type: "number",
-    min: 0,
-  },
-  duration: {
     type: "number",
     min: 0,
   },

@@ -125,8 +125,8 @@ var TypeWritingIncident = /*#__PURE__*/function (_MC$Effect) {
     value: function onGetContext() {
       this.element.style = this.attrs.css;
       this.cursorElement = "<span style=\"".concat(this.attrs.cursorCss, "\">|</span>");
-      this.delay = this.attrs.delay || 0;
-      this.hiatus = this.attrs.hiatus || 0;
+      this.delay = this.attrs.blinkDelay || 0;
+      this.hiatus = this.attrs.blinkhiatus || 0;
     }
   }, {
     key: "getScratchValue",
@@ -143,7 +143,7 @@ var TypeWritingIncident = /*#__PURE__*/function (_MC$Effect) {
         return;
       }
 
-      var duration = this.props.duration;
+      var duration = 6000;
       var typeFraction = (duration - this.delay - this.hiatus) / duration;
       var delayFraction = this.delay / duration;
       var currentTypefraction = (fraction - delayFraction) / typeFraction;
@@ -207,21 +207,20 @@ var ParseText = /*#__PURE__*/function (_MC$HTMLClip) {
           css = _this$attrs.css,
           showCursor = _this$attrs.showCursor,
           cursorCss = _this$attrs.cursorCss,
-          delay = _this$attrs.delay,
-          hiatus = _this$attrs.hiatus,
-          text = _this$attrs.text,
-          duration = _this$attrs.duration;
+          blinkDelay = _this$attrs.blinkDelay,
+          blinkhiatus = _this$attrs.blinkhiatus,
+          text = _this$attrs.text;
       var typewrite = new TypeWritingPlugin.TypeWritingIncident({
         css: css,
         showCursor: showCursor,
         cursorCss: cursorCss,
-        delay: delay,
-        hiatus: hiatus,
+        blinkDelay: blinkDelay,
+        blinkhiatus: blinkhiatus,
         animatedAttrs: {
           text: text
         }
       }, {
-        duration: duration,
+        duration: 6000,
         selector: ".container"
       });
       this.addIncident(typewrite, 0);
@@ -231,15 +230,45 @@ var ParseText = /*#__PURE__*/function (_MC$HTMLClip) {
   return ParseText;
 }(MC__default['default'].HTMLClip);
 
+var TypeWritingVal = {
+  css: {
+    optional: true,
+    type: "string"
+  },
+  showCursor: {
+    optional: true,
+    type: "boolean"
+  },
+  cursorCss: {
+    optional: true,
+    type: "string"
+  },
+  blinkDelay: {
+    optional: false,
+    type: "number",
+    min: 0
+  },
+  blinkhiatus: {
+    optional: true,
+    type: "number",
+    min: 0
+  },
+  text: {
+    type: "string",
+    optional: true
+  }
+};
+
 var name = "@kissmybutton/motorcortex-typewriting";
-var version = "3.0.2";
+var version = "3.1.0";
 
 var index = {
   npm_name: name,
   version: version,
   incidents: [{
     exportable: ParseText,
-    name: "TypeWriting"
+    name: "TypeWriting",
+    attributesValidationRules: TypeWritingVal
   }]
 };
 

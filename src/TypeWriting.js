@@ -5,8 +5,8 @@ class TypeWritingIncident extends MC.Effect {
   onGetContext() {
     this.element.style = this.attrs.css;
     this.cursorElement = `<span style="${this.attrs.cursorCss}">|</span>`;
-    this.delay = this.attrs.delay || 0;
-    this.hiatus = this.attrs.hiatus || 0;
+    this.delay = this.attrs.blinkDelay || 0;
+    this.hiatus = this.attrs.blinkhiatus || 0;
   }
 
   getScratchValue() {
@@ -20,7 +20,7 @@ class TypeWritingIncident extends MC.Effect {
       return;
     }
 
-    const { duration } = this.props;
+    const  duration  = 6000;
     const typeFraction = (duration - this.delay - this.hiatus) / duration;
     const delayFraction = this.delay / duration;
     let currentTypefraction = (fraction - delayFraction) / typeFraction;
@@ -77,23 +77,22 @@ export default class ParseText extends MC.HTMLClip {
       css,
       showCursor,
       cursorCss,
-      delay,
-      hiatus,
+      blinkDelay,
+      blinkhiatus,
       text,
-      duration,
     } = this.attrs;
     const typewrite = new TypeWritingPlugin.TypeWritingIncident(
       {
         css,
         showCursor,
         cursorCss,
-        delay,
-        hiatus,
+        blinkDelay,
+        blinkhiatus,
         animatedAttrs: {
           text,
         },
       },
-      { duration, selector: ".container" }
+      { duration:6000, selector: ".container" }
     );
     this.addIncident(typewrite, 0);
   }

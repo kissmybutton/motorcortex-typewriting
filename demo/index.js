@@ -30,12 +30,11 @@ const typewrite = new TypeWriting.TypeWriting(
     css: `color:#37ff00;font-size:20px;font-weight:bold`,
     showCursor: true,
     cursorCss: "color:#37ff00;font-size:20px;font-weight:bold;",
-    delay: 3000,
-    hiatus: 2000,
-    duration: 6000,
+    blinkDelay: 3000,
+    blinkhiatus: 2000,
     text: `Wake up, Neo...`,
   },
-  { selector: ".container" }
+  { selector: ".container",duration: 6000, }
 );
 
 const typewriteOne = new TypeWriting.TypeWriting(
@@ -43,12 +42,11 @@ const typewriteOne = new TypeWriting.TypeWriting(
     css: `color:#37ff00;font-size:20px;font-weight:bold`,
     showCursor: true,
     cursorCss: "color:#37ff00;font-size:20px;font-weight:bold;",
-    delay: 3000,
-    hiatus: 2000,
-    duration: 6000,
+    blinkDelay: 3000,
+    blinkhiatus: 2000,
     text: `The Matrix has you...`,
   },
-  { selector: ".container" }
+  { selector: ".container",duration: 6000, }
 );
 
 clip.addIncident(typewrite, 0);
